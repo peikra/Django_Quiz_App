@@ -62,9 +62,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def generate_question(self, request):
-        category_id = request.data.get('category_id')
+        category_id = request.data.get('category')
         difficulty = request.data.get('difficulty', 'medium')
 
+        print(category_id)
         category = get_object_or_404(Category, id=category_id)
         chatgpt_service = ChatGPTService()
 
