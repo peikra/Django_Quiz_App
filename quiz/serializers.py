@@ -23,11 +23,12 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class QuizAttemptSerializer(serializers.ModelSerializer):
-    category_name = serializers.CharField(source='category.name', read_only=True)
+    category_name = serializers.CharField(
+        source='category.name', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = QuizAttempt
         fields = ['id', 'user', 'category', 'category_name', 'username',
-                 'score', 'total_questions', 'completed_at']
+                  'score', 'total_questions', 'completed_at']
         read_only_fields = ['user', 'completed_at']
