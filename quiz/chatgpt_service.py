@@ -21,7 +21,8 @@ class ChatGPTService:
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "You are a helpful quiz question generator."},
+                    {"role": "system",
+                        "content": "You are a helpful quiz question generator."},
                     {"role": "user", "content": prompt}
                 ]
             )
@@ -67,7 +68,6 @@ class ChatGPTService:
         except Exception as e:
             print(f"Error evaluating answer: {e}")
             return None
-
 
     def _parse_evaluation_response(self, response):
         # Find the starting index of "Score:" and "Feedback:"

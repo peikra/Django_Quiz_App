@@ -23,7 +23,3 @@ urlpatterns = [
     path('api/quiz/', include('quiz.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]
-
-
-
-

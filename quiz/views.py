@@ -69,7 +69,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
         category = get_object_or_404(Category, id=category_id)
         chatgpt_service = ChatGPTService()
 
-        question_data = chatgpt_service.generate_question(category.name, difficulty)
+        question_data = chatgpt_service.generate_question(
+            category.name, difficulty)
 
         if question_data:
             question = Question.objects.create(
@@ -100,7 +101,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
             }, status=status.HTTP_400_BAD_REQUEST)
 
         chatgpt_service = ChatGPTService()
-        evaluation = chatgpt_service.evaluate_answer(answer_text, question.model_answer)
+        evaluation = chatgpt_service.evaluate_answer(
+            answer_text, question.model_answer)
 
         if evaluation:
             answer = Answer.objects.create(
@@ -131,7 +133,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
         generated_questions = []
 
         for _ in range(num_questions):
-            question_data = chatgpt_service.generate_question(category.name, difficulty)
+            question_data = chatgpt_service.generate_question(
+                category.name, difficulty)
             if question_data:
                 question = Question.objects.create(
                     category=category,
