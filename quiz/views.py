@@ -77,7 +77,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
                 text=question_data['question_text'],
                 model_answer=question_data['model_answer'],
                 difficulty=difficulty,
-                created_by=request.request.user
+                created_by=request.user
             )
 
             return Response({

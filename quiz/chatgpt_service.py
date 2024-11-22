@@ -3,21 +3,13 @@ import openai
 
 class ChatGPTService:
     def __init__(self):
-        self.api_key = "openai_api_key_here"
-        openai.api_key = self.api_key
+        self.api_key = "api_key_here"
+        # openai.api_key = self.api_key
+        self.client = openai.OpenAI(
+            api_key=self.api_key,
+        )
         # githubze ar itvirteba key
 
-    '''
-    Error generating question: 
-
-    You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
-    
-    You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
-    
-    Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
-    
-    A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
-    '''
     def generate_question(self, category, difficulty):
         prompt = f"""Generate an open-ended question about {category} with difficulty level {difficulty}.
         Include both the question and a model answer that can be used to evaluate student responses.
@@ -26,7 +18,7 @@ class ChatGPTService:
         Model Answer: [detailed model answer]"""
 
         try:
-            response = openai.ChatCompletion.create(
+            response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are a helpful quiz question generator."},
